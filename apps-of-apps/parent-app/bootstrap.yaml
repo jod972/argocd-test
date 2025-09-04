@@ -1,0 +1,20 @@
+    apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: parent-apps
+      namespace: argocd
+      labels:
+        argocd.argoproj.io/project: my-bootstrap-project # Link to your project
+    spec:
+      project: my-bootstrap-project
+      source:
+        repoURL: https://github.com/jod972/argocd-test.git
+        targetRevision: HEAD
+        path: apps-of-apps/parent-app # Path to the parent app's manifests
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd # Or where you want the parent app to reside
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

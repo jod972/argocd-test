@@ -1,0 +1,14 @@
+    apiVersion: argoproj.io/v1alpha1
+    kind: AppProject
+    metadata:
+      name: my-bootstrap-project
+      namespace: argocd # Or your Argo CD namespace
+    spec:
+      sourceRepos:
+        - '*' # Allow all repositories for simplicity, or specify
+      destinations:
+        - namespace: '*' # Allow all namespaces, or restrict
+          server: https://kubernetes.default.svc
+      clusterResourceWhitelist:
+        - group: '*'
+          kind: '*'

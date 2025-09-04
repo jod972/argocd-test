@@ -1,0 +1,21 @@
+    # Example child-app-1.yaml in your Git repository (e.g., apps-of-apps/parent-app/child-app-1.yaml)
+    apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: child-app-2
+      namespace: argocd
+      labels:
+        argocd.argoproj.io/project: my-bootstrap-project
+    spec:
+      project: my-bootstrap-project
+      source:
+        repoURL: https://github.com/jod972/argocd-test.git
+        targetRevision: HEAD
+        path: apps/app2
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd # Example destination
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
