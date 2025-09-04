@@ -3,10 +3,8 @@
     metadata:
       name: parent-apps
       namespace: argocd
-      labels:
-        argocd.argoproj.io/project: my-bootstrap-project # Link to your project
     spec:
-      project: my-bootstrap-project
+      project: default
       source:
         repoURL: https://github.com/jod972/argocd-test.git
         targetRevision: HEAD
